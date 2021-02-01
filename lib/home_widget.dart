@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:tp1/information_widget.dart';
 import 'package:tp1/bibliotheque_widget.dart';
 import 'package:tp1/livreslus_widget.dart';
-
-
+import 'package:tp1/main.dart';
 
 
 class HomePage extends StatefulWidget {
+
   @override
   State<StatefulWidget> createState() {
     return _HomeState();

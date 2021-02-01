@@ -1,20 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tp1/main.dart';
+
+import 'Livre.dart';
+import 'livreinfo_widget.dart';
 
 class Bibliotheque extends StatefulWidget {
+
   @override
   State<Bibliotheque> createState() => _BibliothequeState();
 }
 
 class _BibliothequeState extends State<Bibliotheque> {
-  final _contenu = <String>["Un", "Livre", "Sympathique"];
+
+  final _contenu = Bib_titres;
   final _lus = <String>{};
   final _biggerFont = TextStyle(fontSize: 18.0);
+
+
 
   Widget _buildSuggestions() {
     return ListView.separated(
       padding: const EdgeInsets.all(8),
-      itemCount: _contenu.length,
+      itemCount: Bib_init.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
           height: 50,
@@ -35,12 +43,16 @@ class _BibliothequeState extends State<Bibliotheque> {
         pair,
         style: _biggerFont,
       ),
+      leading: new CircleAvatar(
+        child: getLivre(pair).cover,
+      ),
       trailing: Wrap(spacing: 12, children: <Widget>[
-        Icon(dejaLu ? Icons.check_box_outlined: Icons.check_box_outline_blank,
+        Icon(dejaLu ? Icons.check_box_outlined : Icons.check_box_outline_blank,
             color: dejaLu ? Colors.blueGrey : null),
         TextButton.icon(
           onPressed: () {
-            // Respond to button press
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => LivreInfo(pair)));
           },
           icon: Icon(Icons.arrow_forward, size: 18),
           label: Text("Résumé"),
@@ -93,7 +105,7 @@ class _BibliothequeState extends State<Bibliotheque> {
                   },
                   icon: Icon(Icons.arrow_forward, size: 18),
                   label: Text("Résumé"),
-                ) ,
+                ),
               );
             },
           );

@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tp1/livreinfo_widget.dart';
+import 'package:tp1/Livre.dart';
+
+import 'main.dart';
 
 class LivresLus extends StatefulWidget {
   @override
@@ -7,7 +11,7 @@ class LivresLus extends StatefulWidget {
 }
 
 class _LivresLusState extends State<LivresLus> {
-  final _suggestions = <String>["test", "je", "magic"];
+  final _suggestions = Bib_titres;
   final _saved = <String>{};
   final _biggerFont = TextStyle(fontSize: 18.0);
 
@@ -35,12 +39,16 @@ class _LivresLusState extends State<LivresLus> {
         pair,
         style: _biggerFont,
       ),
+      leading: new CircleAvatar(
+        child: getLivre(pair).cover,
+      ),
       trailing: Wrap(spacing: 12, children: <Widget>[
         Icon(alreadySaved ? Icons.favorite : Icons.favorite_border,
             color: alreadySaved ? Colors.red : null),
         TextButton.icon(
           onPressed: () {
-            // Respond to button press
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => LivreInfo(pair)));
           },
           icon: Icon(Icons.arrow_forward, size: 18),
           label: Text("Résumé"),
@@ -76,7 +84,7 @@ class _LivresLusState extends State<LivresLus> {
 
   // #enddocregion RWS-build
 
-  void _pushSaved() {
+  void _pushInfo() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (BuildContext context) {
@@ -93,7 +101,45 @@ class _LivresLusState extends State<LivresLus> {
                   },
                   icon: Icon(Icons.arrow_forward, size: 18),
                   label: Text("Résumé"),
-                ) ,
+                ),
+              );
+            },
+          );
+          final divided = ListTile.divideTiles(
+            context: context,
+            tiles: tiles,
+          ).toList();
+
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Favoris'),
+            ),
+            body: ListView(children: divided),
+          );
+        },
+      ),
+    );
+  }
+
+  void _pushSaved() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          final tiles = _saved.map(
+            (String pair) {
+              return ListTile(
+                title: Text(
+                  pair,
+                  style: _biggerFont,
+                ),
+                trailing: TextButton.icon(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => LivreInfo(pair)));
+                  },
+                  icon: Icon(Icons.arrow_forward, size: 18),
+                  label: Text("Résumé"),
+                ),
               );
             },
           );
