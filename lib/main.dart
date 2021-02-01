@@ -8,7 +8,7 @@ Livre alaska = new Livre(
     "Qui es-tu Alaska?",
     "John Green",
     2014,
-    Image.asset('alaska.jpg'),
+    Image.asset('assets/alaska.jpg'),
     "Miles Halter a seize ans et n'a pas l'impression d'avoir vécu. Assoiffé d'expériences, il décide de quitter le petit cocon familial pour partir loin, en Alabama au pensionnat de Culver Creek. Ce sera le lieu de tous les possibles, du Grand Peut Etre. Et de toutes les premières fois. C'est là aussi, qu'il rencontre Alaska. La troublante, l'insaisissable et insoumise, drôle, intelligente et follement sexy, Alaska Young. Qui es-tu Alaska? est LE roman de l'adolescence: les amitiés fortes, l'amour, la transgression, la soif de connaissance et la fondamentale quête de sens. ");
 Livre aliene = new Livre (
     "Qui est aliéné?",

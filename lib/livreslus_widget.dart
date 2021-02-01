@@ -11,18 +11,18 @@ class LivresLus extends StatefulWidget {
 }
 
 class _LivresLusState extends State<LivresLus> {
-  final _suggestions = Bib_titres;
+  final _lus = getDejaLus().toList();
   final _saved = <String>{};
   final _biggerFont = TextStyle(fontSize: 18.0);
 
   Widget _buildSuggestions() {
     return ListView.separated(
       padding: const EdgeInsets.all(8),
-      itemCount: _suggestions.length,
+      itemCount: _lus.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
           height: 50,
-          child: Center(child: _buildRow(_suggestions[index])),
+          child: Center(child: _buildRow(_lus[index])),
         );
       },
       separatorBuilder: (BuildContext context, int index) => const Divider(),
@@ -84,42 +84,6 @@ class _LivresLusState extends State<LivresLus> {
 
   // #enddocregion RWS-build
 
-  void _pushInfo() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          final tiles = _saved.map(
-            (String pair) {
-              return ListTile(
-                title: Text(
-                  pair,
-                  style: _biggerFont,
-                ),
-                trailing: TextButton.icon(
-                  onPressed: () {
-                    // Respond to button press
-                  },
-                  icon: Icon(Icons.arrow_forward, size: 18),
-                  label: Text("Résumé"),
-                ),
-              );
-            },
-          );
-          final divided = ListTile.divideTiles(
-            context: context,
-            tiles: tiles,
-          ).toList();
-
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('Favoris'),
-            ),
-            body: ListView(children: divided),
-          );
-        },
-      ),
-    );
-  }
 
   void _pushSaved() {
     Navigator.of(context).push(
@@ -131,6 +95,9 @@ class _LivresLusState extends State<LivresLus> {
                 title: Text(
                   pair,
                   style: _biggerFont,
+                ),
+                leading: new CircleAvatar(
+                  child: getLivre(pair).cover,
                 ),
                 trailing: TextButton.icon(
                   onPressed: () {
