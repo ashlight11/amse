@@ -47,8 +47,8 @@ class _LivresLusState extends State<LivresLus> {
             color: alreadySaved ? Colors.red : null),
         TextButton.icon(
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => LivreInfo(pair)));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => LivreInfo(pair)));
           },
           icon: Icon(Icons.arrow_forward, size: 18),
           label: Text("Résumé"),
@@ -84,7 +84,6 @@ class _LivresLusState extends State<LivresLus> {
 
   // #enddocregion RWS-build
 
-
   void _pushSaved() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
@@ -101,8 +100,10 @@ class _LivresLusState extends State<LivresLus> {
                 ),
                 trailing: TextButton.icon(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LivreInfo(pair)));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => LivreInfo(pair)));
                   },
                   icon: Icon(Icons.arrow_forward, size: 18),
                   label: Text("Résumé"),

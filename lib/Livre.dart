@@ -21,6 +21,20 @@ class Livre {
     this.read = false;
   }
 
+  String getAuthor(){
+    return this.author;
+  }
+
+  int getYear(){
+    return this.year;
+  }
+
+  String getPitch(){
+    return this.pitch;
+  }
+
+
+
   void lire() {
     this.read = !this.read;
   }
@@ -40,12 +54,22 @@ Livre getLivre(String s) {
   return result;
 }
 
+
+
 Set<String> getDejaLus() {
   var result = <String>{};
   for (int i = 0; i < Bib_init.length; i++) {
     if (Bib_init[i].read) {
       result.add(Bib_init[i].title);
     }
+  }
+  return result;
+}
+
+List<String> getTitres() {
+  var result = <String>[];
+  for (int i = 0; i < Bib_init.length; i++) {
+      result.add(Bib_init[i].title);
   }
   return result;
 }

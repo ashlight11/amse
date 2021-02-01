@@ -6,16 +6,13 @@ import 'Livre.dart';
 import 'livreinfo_widget.dart';
 
 class Bibliotheque extends StatefulWidget {
-
   @override
   State<Bibliotheque> createState() => _BibliothequeState();
 }
 
 class _BibliothequeState extends State<Bibliotheque> {
-
   final _contenu = Bib_titres;
   final _biggerFont = TextStyle(fontSize: 18.0);
-
 
   Widget _buildSuggestions() {
     return ListView.separated(
@@ -31,7 +28,6 @@ class _BibliothequeState extends State<Bibliotheque> {
     );
   }
 
-
   Widget _buildRow(String pair) {
     final dejaLu = getLivre(pair).dejaLu();
     return ListTile(
@@ -45,18 +41,20 @@ class _BibliothequeState extends State<Bibliotheque> {
       trailing: Wrap(spacing: 12, children: <Widget>[
         Icon(dejaLu ? Icons.check_box_outlined : Icons.check_box_outline_blank,
             color: dejaLu ? Colors.blueGrey : null),
-        TextButton.icon( // Accéder aux informations sur le livre
+        TextButton.icon(
+          // Accéder aux informations sur le livre
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => LivreInfo(pair)));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => LivreInfo(pair)));
           },
           icon: Icon(Icons.arrow_forward, size: 18),
           label: Text("Résumé"),
         )
       ]),
-      onTap: () {setState(() {
-        getLivre(pair).lire();
-      });
+      onTap: () {
+        setState(() {
+          getLivre(pair).lire();
+        });
       },
     );
   }
@@ -73,6 +71,4 @@ class _BibliothequeState extends State<Bibliotheque> {
       body: _buildSuggestions(),
     );
   }
-
 }
-
