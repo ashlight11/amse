@@ -10,6 +10,7 @@ class HomePage extends StatefulWidget {
   }
 }
 
+/* Création de la barre de navigation */
 class _HomeState extends State<HomePage> {
   int _currentIndex = 0;
   final List<Widget> _children = [

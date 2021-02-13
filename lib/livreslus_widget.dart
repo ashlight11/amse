@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tp1/livreinfo_widget.dart';
 import 'package:tp1/Livre.dart';
 
-import 'main.dart';
+/* Gère l'affichage des favoris */
 
 class LivresLus extends StatefulWidget {
   @override
@@ -11,11 +11,12 @@ class LivresLus extends StatefulWidget {
 }
 
 class _LivresLusState extends State<LivresLus> {
-  final _lus = getDejaLus().toList();
-  final _saved = <String>{};
+  final _lus = getDejaLus()
+      .toList(); // -> ransforme un set en list afin d'itérer dans un ListView
+  final _favoris = <String>{};
   final _biggerFont = TextStyle(fontSize: 18.0);
 
-  Widget _buildSuggestions() {
+  Widget _buildBibliotheque() {
     return ListView.separated(
       padding: const EdgeInsets.all(8),
       itemCount: _lus.length,
@@ -29,26 +30,27 @@ class _LivresLusState extends State<LivresLus> {
     );
   }
 
-  // #enddocregion _buildSuggestions
+  // #enddocregion _buildBibliotheque
 
   // #docregion _buildRow
-  Widget _buildRow(String pair) {
-    final alreadySaved = _saved.contains(pair);
+  Widget _buildRow(String titre) {
+    final alreadySaved = _favoris.contains(titre);
     return ListTile(
       title: Text(
-        pair,
+        titre,
         style: _biggerFont,
       ),
       leading: new CircleAvatar(
-        child: getLivre(pair).cover,
+        child: getLivre(titre).cover,
       ),
       trailing: Wrap(spacing: 12, children: <Widget>[
+        // -> Permet d'ajouter ou d'enlever un livre de ses favoris
         Icon(alreadySaved ? Icons.favorite : Icons.favorite_border,
             color: alreadySaved ? Colors.red : null),
         TextButton.icon(
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => LivreInfo(pair)));
+                MaterialPageRoute(builder: (context) => LivreInfo(titre)));
           },
           icon: Icon(Icons.arrow_forward, size: 18),
           label: Text("Résumé"),
@@ -56,54 +58,51 @@ class _LivresLusState extends State<LivresLus> {
       ]),
       onTap: () {
         setState(() {
+          // -> gère la liste dans les faits et rafraichit l'affichage
           if (alreadySaved) {
-            _saved.remove(pair);
+            _favoris.remove(titre);
           } else {
-            _saved.add(pair);
+            _favoris.add(titre);
           }
         });
       },
     );
   }
 
-  // #enddocregion _buildRow
-
-  // #docregion RWS-build
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Livres lus'),
         actions: [
-          IconButton(icon: Icon(Icons.list), onPressed: _pushSaved),
+          IconButton(icon: Icon(Icons.list), onPressed: _pushFavoris),
         ],
       ),
-      body: _buildSuggestions(),
+      body: _buildBibliotheque(),
     );
   }
 
-  // #enddocregion RWS-build
-
-  void _pushSaved() {
+  /* Création des favoris au click sur l'icône de liste */
+  void _pushFavoris() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (BuildContext context) {
-          final tiles = _saved.map(
-            (String pair) {
+          final tiles = _favoris.map(
+            (String titre) {
               return ListTile(
                 title: Text(
-                  pair,
+                  titre,
                   style: _biggerFont,
                 ),
                 leading: new CircleAvatar(
-                  child: getLivre(pair).cover,
+                  child: getLivre(titre).cover,
                 ),
                 trailing: TextButton.icon(
                   onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => LivreInfo(pair)));
+                            builder: (context) => LivreInfo(titre)));
                   },
                   icon: Icon(Icons.arrow_forward, size: 18),
                   label: Text("Résumé"),

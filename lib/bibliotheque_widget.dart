@@ -14,7 +14,8 @@ class _BibliothequeState extends State<Bibliotheque> {
   final _contenu = Bib_titres;
   final _biggerFont = TextStyle(fontSize: 18.0);
 
-  Widget _buildSuggestions() {
+  /* Constructeur de la liste des livres à afficher dans la bibliothèque */
+  Widget _buildBibliotheque() {
     return ListView.separated(
       padding: const EdgeInsets.all(8),
       itemCount: Bib_init.length,
@@ -27,25 +28,27 @@ class _BibliothequeState extends State<Bibliotheque> {
       separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
+/* Contenu des lignes et action possibles dessus */
 
-  Widget _buildRow(String pair) {
-    final dejaLu = getLivre(pair).dejaLu();
+  Widget _buildRow(String titre) {
+    final dejaLu = getLivre(titre).dejaLu();
     return ListTile(
       title: Text(
-        pair,
+        titre,
         style: _biggerFont,
       ),
-      leading: new CircleAvatar(
-        child: getLivre(pair).cover,
+      leading: new CircleAvatar( //-> CircleAvatar pour unifier l'affichage
+        child: getLivre(titre).cover,
       ),
       trailing: Wrap(spacing: 12, children: <Widget>[
+        // Permet d'ajouter un livre à sa liste des déjà lus
         Icon(dejaLu ? Icons.check_box_outlined : Icons.check_box_outline_blank,
             color: dejaLu ? Colors.blueGrey : null),
         TextButton.icon(
           // Accéder aux informations sur le livre
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => LivreInfo(pair)));
+                MaterialPageRoute(builder: (context) => LivreInfo(titre)));
           },
           icon: Icon(Icons.arrow_forward, size: 18),
           label: Text("Résumé"),
@@ -53,22 +56,19 @@ class _BibliothequeState extends State<Bibliotheque> {
       ]),
       onTap: () {
         setState(() {
-          getLivre(pair).lire();
+          getLivre(titre).lire();
         });
       },
     );
   }
 
-  // #enddocregion _buildRow
-
-  // #docregion RWS-build
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Livres à lire'),
       ),
-      body: _buildSuggestions(),
+      body: _buildBibliotheque(),
     );
   }
 }

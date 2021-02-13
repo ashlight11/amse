@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Livre.dart';
 
+/* Gère l'affichage du résumé des livres */
+
 class LivreInfo extends StatefulWidget {
   String titre;
 
@@ -32,7 +34,7 @@ class _LivreInfoState extends State<LivreInfo> {
         appBar: AppBar(
           title: Text("$titre"),
         ),
-        body: ListView(
+        body: ListView( // -> ListView pour permettre de scroller et empêcher l'overflow du texte
           padding: const EdgeInsets.all(8),
           children: <Widget>[
             Container(
@@ -49,8 +51,8 @@ class _LivreInfoState extends State<LivreInfo> {
               child: Center(
                   child: Flexible(
                       child: Text(selection.getPitch(),
-                          softWrap: true,
-                          overflow: TextOverflow.visible,
+                          softWrap: true, // -> évite les coupures abruptes
+                          overflow: TextOverflow.visible, // -> évite un overflow mal géré
                           style: TextStyle(height: 2)))),
             )
           ],

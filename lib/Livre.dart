@@ -4,6 +4,11 @@ import 'package:flutter/cupertino.dart';
 
 import 'main.dart';
 
+/* Classe qui permet d'avoir un type unfiforme de données à afficher
+* Garantit une modularité plus grande car il suffit d'ajouter des nouveaux livres à la liste Bib_init
+* pour agrandir sa bibliothèque.
+* Le type Livre est géré sans modification par la suite.*/
+
 class Livre {
   String title;
   String author;
@@ -21,19 +26,17 @@ class Livre {
     this.read = false;
   }
 
-  String getAuthor(){
+  String getAuthor() {
     return this.author;
   }
 
-  int getYear(){
+  int getYear() {
     return this.year;
   }
 
-  String getPitch(){
+  String getPitch() {
     return this.pitch;
   }
-
-
 
   void lire() {
     this.read = !this.read;
@@ -43,6 +46,7 @@ class Livre {
     return this.read;
   }
 }
+/* Retourne le livre désigné par le titre S */
 
 Livre getLivre(String s) {
   Livre result;
@@ -53,9 +57,8 @@ Livre getLivre(String s) {
   }
   return result;
 }
-
-
-
+/* Retourne un ensemble de livres déjà lus afin de les afficher dans l'onglet Déjà Lus
+* Un set, à la différence du liste, empêche l'existence de deux éléments strictement identiques en son sein.*/
 Set<String> getDejaLus() {
   var result = <String>{};
   for (int i = 0; i < Bib_init.length; i++) {
@@ -66,10 +69,11 @@ Set<String> getDejaLus() {
   return result;
 }
 
+/* Retourne la liste des titres de la bibliothèque d'appel */
 List<String> getTitres() {
   var result = <String>[];
   for (int i = 0; i < Bib_init.length; i++) {
-      result.add(Bib_init[i].title);
+    result.add(Bib_init[i].title);
   }
   return result;
 }

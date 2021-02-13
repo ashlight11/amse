@@ -42,10 +42,47 @@ Livre fille = new Livre(
     Image.asset('assets/fille.jpg'),
     "Tom Boyd, un écrivain célèbre en panne d¹inspiration, voit surgir dans sa vie l’héroïne de ses romans. Elle est jolie, elle est désespérée, elle va mourir s’il s’arrête d’écrire. Impossible ? Et pourtant !");
 
-// bibliothèque initiale
+Livre hommesfous = new Livre(
+  "Tous les hommes en sont fous",
+  "Jean d'Ormesson",
+  1989,
+  Image.asset('assets/hommesfous.jpg'),
+  "Jean D'Ormesson a écrit des romans tels que La gloire de l'Empire, Au plaisir de Dieu; des essais, Au revoir et merci; une biographie de Chateaubriand, Mon dernier rêve sera pour vous. Tous les hommes en sont fous est le deuxième volume d'une trilogie dont le premier volume, Le evnt du soir, s'est vendu à 600 000 exemplaires.",
+);
 
-List<Livre> Bib_init = [alaska, aliene, bojangles, etoiles, exctinction, fille];
-List<String> Bib_titres = getTitres();
+Livre tresse = new Livre(
+    "La tresse",
+    "Laetitia Colombani",
+    2017,
+    Image.asset('assets/tresse.jpg'),
+    "Trois femmes, trois vies, trois continents. Une même soif de liberté. "
+        "Inde. Smita est une Intouchable. Elle rêve de voir sa fille échapper à sa condition misérable et entrer à l’école."
+        "Sicile. Giulia travaille dans l’atelier de son père. Lorsqu’il est victime d’un accident, elle découvre que l’entreprise familiale est ruinée."
+        "Canada. Sarah, avocate réputée, va être promue à la tête de son cabinet quand elle apprend qu’elle est gravement malade."
+        "Liées sans le savoir par ce qu’elles ont de plus intime et de plus singulier, Smita, Giulia et Sarah refusent le sort qui leur est destiné et décident de se battre. Vibrantes d’humanité, leurs histoires tissent une tresse d’espoir et de solidarité.");
+
+Livre nuit = new Livre(
+    "La nuit n'éclaire pas tout",
+    "Patricia Reznikov",
+    2011,
+    Image.asset('assets/nuit.jpg'),
+    "Benjamin Himmelsbar, vieil écrivain solitaire, rencontre une mystérieuse jeune femme qui lui propose de la suivre. De Paris à Amsterdam et de Londres à Turin, ils errent et font des rencontres dans l’Europe cosmopolite des années 1920."
+        "Par sa liberté et sa fantaisie mêlant humour, érudition, légèreté et tragique, par son atmosphère envoûtante, La nuit n’éclaire pas tout a l’art de faire advenir le mystère et de lui donner sens.");
+
+// Bibliothèque initiale
+
+List<Livre> Bib_init = [
+  alaska,
+  aliene,
+  bojangles,
+  etoiles,
+  exctinction,
+  fille,
+  hommesfous,
+  tresse,
+  nuit
+];
+List<String> Bib_titres = getTitres(); // récupérer la liste des titres uniquement
 
 void main() {
   runApp(MyApp());
@@ -56,7 +93,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'My Flutter Demo',
+      title: 'My First Flutter App',
       theme: ThemeData(
         primarySwatch: Colors.pink,
       ),

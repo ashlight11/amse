@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/* Page d'informations générales sur l'application*/
+
 class InformationWidget extends StatelessWidget {
   InformationWidget();
 
@@ -9,6 +11,7 @@ class InformationWidget extends StatelessWidget {
         padding: EdgeInsets.all(10),
         child: Center(
             child: RichText(
+              // -> RichText afin d'ajouter des effets de style sur l'affichage
           text: TextSpan(
             text: "Bienvenue sur la page d' ",
             style: DefaultTextStyle.of(context).style,
